@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ЛР5: Блок-схема алгоритма – ГОСТ 19.701-90 (итоговая исправленная)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #eef2f0;
+            font-family: 'Times New Roman', 'Georgia', 'Segoe UI', serif;
+            padding: 2rem 1rem;
+            color: #1e2f2c;
+        }
+        .report-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            padding: 2rem 2rem 2.5rem;
+        }
+        h1 {
+            font-size: 1.9rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1c5a55;
+        }
+        .lab-sub {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #3c6e68;
+            border-bottom: 2px solid #cbdcd7;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem;
+            padding-left: 0.5rem;
+            border-left: 6px solid #2a6b66;
+            color: #215a55;
+            font-weight: 600;
+        }
+        .vars-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0 1.5rem;
+            font-size: 0.95rem;
+            background: #fafcf9;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .vars-table th, .vars-table td {
+            border: 1px solid #cddad4;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .vars-table th {
+            background: #e3f0ec;
+            font-weight: 600;
+            color: #1c534f;
+        }
+        .scheme-wrapper {
+            background: #fefef9;
+            border-radius: 2rem;
+            padding: 1.5rem 0.8rem;
+            margin: 2rem 0;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.02), 0 12px 24px rgba(0, 0, 0, 0.04);
+            overflow-x: auto;
+        }
+        .scheme-svg-container {
+            display: flex;
+            justify-content: center;
+            min-width: min-content;
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            font-family: 'Times New Roman', serif;
+        }
+        .flowchart-caption {
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 0.75rem;
+            font-style: italic;
+            color: #2b5f5a;
+        }
+        .note {
+            background: #e9f3f0;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            margin: 1.2rem 0;
+            font-size: 0.92rem;
+            border-left: 4px solid #6da39b;
+        }
+        .code-note {
+            background: #f2f6f3;
+            padding: 0.8rem 1.2rem;
+            border-radius: 24px;
+            font-family: 'JetBrains Mono', 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+            border-left: 5px solid #2a6b66;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+        }
+        .gost-rules {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .gost-item {
+            background: #f8faf7;
+            padding: 0.6rem 1rem;
+            border-radius: 16px;
+            border-left: 3px solid #2a6b66;
+            font-size: 0.9rem;
+        }
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #4f776f;
+            border-top: 1px solid #cfdfd9;
+            padding-top: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="report-container">
+    <h1>Лабораторная работа №5</h1>
+    <div class="lab-sub">Циклические вычислительные процессы | Вариант №9</div>
+
+    <h2>🔢 Назначение идентификаторов (переменных)</h2>
+    <table class="vars-table">
+        <thead><tr><th>Имя</th><th>Тип</th><th>Назначение</th></tr></thead>
+        <tbody>
+        <tr><td>x</td><td>double</td><td>аргумент функции (вводится пользователем)</td></tr>
+        <tr><td>k</td><td>int</td><td>счётчик цикла (номер члена ряда)</td></tr>
+        <tr><td>term</td><td>double</td><td>текущий член ряда: ln(1 - 4x²/((2k-1)²π²))</td></tr>
+        <tr><td>S</td><td>double</td><td>накопленная сумма ряда</td></tr>
+        <tr><td>epsilon</td><td>double</td><td>заданная точность (например, 1e-6)</td></tr>
+        <tr><td>max_iter</td><td>int</td><td>максимальное число итераций (защита от бесконечного цикла)</td></tr>
+        </tbody>
+    </table>
+
+    <h2>📐 Блок-схема алгоритма (по ГОСТ 19.701-90)</h2>
+    <p>Алгоритм вычисляет сумму бесконечного ряда <strong>S = Σ ln(1 - 4x²/((2k-1)²π²))</strong> с заданной точностью ε.<br>
+        Блок-схема выполнена в строгом соответствии с <strong>ГОСТ 19.701-90 (ISO 5807-85)</strong>.</p>
+    <div class="gost-rules">
+        <div class="gost-item">✅ Стрелки только при движении снизу вверх или справа налево</div>
+        <div class="gost-item">✅ Линии только вертикальные и горизонтальные</div>
+        <div class="gost-item">✅ Подписи «Да»/«Нет» рядом с линиями, не пересекая их</div>
+        <div class="gost-item">✅ Стрелка точно на конце линии, не смещена</div>
+        <div class="gost-item">✅ Пересечения линий — дуга (мостик) не нарушает линию</div>
+        <div class="gost-item">✅ Параллелограмм для ввода/вывода</div>
+    </div>
+
+    <div class="scheme-wrapper">
+        <div class="scheme-svg-container">
+            <svg id="flowchart" width="980" height="1220" viewBox="0 0 980 1220" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Стрелка вверх (для линии снизу вверх) -->
+                    <marker id="arrowUp" markerWidth="12" markerHeight="12" refX="6" refY="0" orient="0">
+                        <polygon points="0,12 6,0 12,12" fill="#1f5e55" stroke="none" />
+                    </marker>
+                    <!-- Стрелка влево (для линии справа налево) -->
+                    <marker id="arrowLeft" markerWidth="12" markerHeight="12" refX="0" refY="6" orient="0">
+                        <polygon points="12,0 0,6 12,12" fill="#b1624b" stroke="none" />
+                    </marker>
+                </defs>
+
+                <!-- =========== 1. НАЧАЛО =========== -->
+                <rect x="380" y="20" width="200" height="46" rx="23" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="480" y="49" font-size="18" font-weight="bold" fill="#1c534f" text-anchor="middle">НАЧАЛО</text>
+                <line x1="480" y1="66" x2="480" y2="102" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 2. Ввод данных =========== -->
+                <polygon points="360,102 600,102 560,152 320,152" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="460" y="134" font-size="15" font-weight="bold" text-anchor="middle">Ввод x, ε, max_iter</text>
+                <line x1="460" y1="152" x2="460" y2="188" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 3. Инициализация =========== -->
+                <rect x="330" y="188" width="260" height="52" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="460" y="214" font-size="15" font-weight="bold" text-anchor="middle">S = 0.0 ;  k = 1</text>
+                <line x1="460" y1="240" x2="460" y2="278" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 4. Вычисление знаменателя и аргумента =========== -->
+                <rect x="280" y="278" width="360" height="56" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="460" y="300" font-size="13" font-weight="bold" text-anchor="middle">denom = (2k-1)²·π²</text>
+                <text x="460" y="322" font-size="13" font-weight="bold" text-anchor="middle">arg = 1 – 4·x² / denom</text>
+                <line x1="460" y1="334" x2="460" y2="372" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 5. Ромб: arg ≤ 0 ? =========== -->
+                <polygon points="460,372 600,422 460,472 320,422" fill="white" stroke="#b1624b" stroke-width="2" />
+                <text x="460" y="428" font-size="15" font-weight="bold" fill="#b1624b" text-anchor="middle">arg ≤ 0 ?</text>
+
+                <!-- Ветка "ДА" -->
+                <line x1="600" y1="422" x2="680" y2="422" stroke="#b1624b" stroke-width="2" />
+                <text x="640" y="414" font-size="15" fill="#b45f2e" font-weight="bold">Да</text>
+                <rect x="682" y="398" width="230" height="48" rx="8" fill="white" stroke="#b1624b" stroke-width="2" />
+                <text x="797" y="418" font-size="13" font-weight="bold" fill="#b45f2e" text-anchor="middle">Ошибка: аргумент ≤ 0</text>
+                <text x="797" y="437" font-size="13" fill="#b45f2e" text-anchor="middle">(ряд расходится)</text>
+
+                <!-- Аварийная ветка к КОНЦУ (справа налево, стрелка влево) -->
+                <line x1="797" y1="446" x2="797" y2="1112" stroke="#b1624b" stroke-width="2" stroke-dasharray="6,4" />
+                <line x1="797" y1="1112" x2="620" y2="1112" stroke="#b1624b" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowLeft)" />
+                <text x="810" y="1065" font-size="12" fill="#b45f2e" font-style="italic">аварийный выход</text>
+
+                <!-- Ветка "НЕТ" -->
+                <line x1="460" y1="472" x2="460" y2="514" stroke="#1f5e55" stroke-width="2" />
+                <text x="395" y="496" font-size="15" fill="#1f5e55" font-weight="bold">Нет</text>
+
+                <!-- =========== 6. term = ln(arg) =========== -->
+                <rect x="330" y="514" width="260" height="48" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="460" y="540" font-size="15" font-weight="bold" text-anchor="middle">term = ln(arg)</text>
+                <line x1="460" y1="562" x2="460" y2="600" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 7. S = S + term =========== -->
+                <rect x="330" y="600" width="260" height="48" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="460" y="626" font-size="15" font-weight="bold" text-anchor="middle">S = S + term</text>
+                <line x1="460" y1="648" x2="460" y2="686" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 8. Вывод промежуточных значений =========== -->
+                <polygon points="350,686 570,686 530,726 310,726" fill="white" stroke="#4f7a72" stroke-width="2" />
+                <text x="440" y="712" font-size="13" font-weight="bold" fill="#2f6b62" text-anchor="middle">Вывод k, term, S</text>
+                <line x1="440" y1="726" x2="440" y2="764" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 9. k = k + 1 =========== -->
+                <rect x="330" y="764" width="260" height="48" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="460" y="790" font-size="15" font-weight="bold" text-anchor="middle">k = k + 1</text>
+                <line x1="460" y1="812" x2="460" y2="850" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 10. Условие продолжения цикла =========== -->
+                <polygon points="460,850 620,900 460,950 300,900" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="460" y="895" font-size="14" font-weight="bold" text-anchor="middle">|term| ≥ ε и</text>
+                <text x="460" y="914" font-size="14" font-weight="bold" text-anchor="middle">k ≤ max_iter ?</text>
+
+                <!-- Ветка "ДА" – возврат к вычислениям -->
+                <line x1="300" y1="900" x2="200" y2="900" stroke="#1f5e55" stroke-width="2" />
+                <text x="225" y="888" font-size="15" fill="#1f5e55" font-weight="bold">Да</text>
+
+                <!-- Линия возврата (снизу вверх, стрелка вверх) -->
+                <line x1="200" y1="900" x2="200" y2="306" stroke="#1f5e55" stroke-width="2" marker-end="url(#arrowUp)" />
+
+                <!-- Дуга-мостик для обхода блока вычислений -->
+                <path d="M 200,420 Q 230,420 230,400 Q 230,380 200,380" fill="none" stroke="#1f5e55" stroke-width="2" stroke-linecap="round" />
+                <line x1="200" y1="380" x2="200" y2="306" stroke="#1f5e55" stroke-width="2" />
+                <line x1="200" y1="900" x2="200" y2="420" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- Соединение к блоку вычислений -->
+                <line x1="200" y1="306" x2="278" y2="306" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- Ветка "НЕТ" – выход из цикла -->
+                <line x1="620" y1="900" x2="710" y2="900" stroke="#1f5e55" stroke-width="2" />
+                <text x="665" y="888" font-size="15" fill="#1f5e55" font-weight="bold">Нет</text>
+                <line x1="710" y1="900" x2="710" y2="998" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 11. Вывод итогового результата =========== -->
+                <polygon points="540,998 740,998 700,1048 500,1048" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="620" y="1028" font-size="15" font-weight="bold" text-anchor="middle">Вывод S, число членов</text>
+                <line x1="620" y1="1048" x2="620" y2="1088" stroke="#1f5e55" stroke-width="2" />
+
+                <!-- =========== 12. КОНЕЦ =========== -->
+                <rect x="520" y="1088" width="200" height="46" rx="23" fill="white" stroke="#1c534f" stroke-width="2" />
+                <text x="620" y="1117" font-size="18" font-weight="bold" fill="#1c534f" text-anchor="middle">КОНЕЦ</text>
+
+                <!-- Рамка тела цикла -->
+                <rect x="140" y="260" width="580" height="710" rx="20" fill="none" stroke="#2a6b66" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.45" />
+                <text x="150" y="280" font-size="12" fill="#2a6b66" font-style="italic">Тело цикла</text>
+
+                <!-- Легенда -->
+                <text x="30" y="1180" font-size="11" fill="#5a7c75" font-style="italic">Примечание: стрелки поставлены только для нестандартного направления потока (снизу вверх, справа налево) согласно ГОСТ 19.701-90</text>
+                <text x="30" y="1198" font-size="11" fill="#5a7c75" font-style="italic">Пересечение линии возврата с блоком вычислений оформлено дугой (мостик) — линия не прерывается</text>
+            </svg>
+        </div>
+        <div class="flowchart-caption">
+            Рисунок 1 — Блок-схема алгоритма суммирования ряда (вариант 9).<br>
+            Выполнена по ГОСТ 19.701-90: линии непрерывны, стрелки на линиях снизу вверх и справа налево.
+        </div>
+    </div>
+
+    <h2>📖 Пояснения к блок-схеме</h2>
+    <div class="note">
+        <strong>🔷 Последовательность работы алгоритма:</strong>
+        <ul style="margin-top: 0.5rem; margin-left: 1.8rem;">
+            <li><strong>Ввод данных:</strong> x, точность ε, максимальное количество итераций.</li>
+            <li><strong>Инициализация:</strong> S = 0, k = 1.</li>
+            <li><strong>Вычисление аргумента логарифма:</strong> если arg ≤ 0 — ошибка, завершение.</li>
+            <li><strong>Вычисление term</strong> = ln(arg) и накопление суммы S += term.</li>
+            <li><strong>Вывод промежуточных значений</strong> (отладка).</li>
+            <li><strong>Инкремент счётчика</strong> k = k + 1.</li>
+            <li><strong>Проверка условия продолжения:</strong> если |term| ≥ ε и k ≤ max_iter — переход к следующей итерации, иначе — выход.</li>
+            <li><strong>Вывод результата:</strong> итоговая сумма S и количество выполненных итераций.</li>
+        </ul>
+    </div>
+
+    <h2>🧾 Фрагмент программного кода</h2>
+    <div class="code-note">
+        <strong>// Реализация циклического суммирования (вариант 9)</strong><br>
+        double x, S = 0.0, term, epsilon;<br>
+        int k = 1, max_iter;<br>
+        <br>
+        printf("Введите x: "); scanf("%lf", &x);<br>
+        printf("Введите epsilon: "); scanf("%lf", &epsilon);<br>
+        printf("Введите max_iter: "); scanf("%d", &max_iter);<br>
+        <br>
+        do {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;double denominator = (2.0*k - 1)*(2.0*k - 1)*M_PI*M_PI;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;double arg = 1.0 - (4.0*x*x) / denominator;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;if (arg <= 0) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Ошибка: аргумент логарифма ≤ 0 при k = %d\n", k);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;term = log(arg);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;S += term;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;printf("k=%d  term=%10.8f  S=%10.8f\n", k, term, S);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;k++;<br>
+        } while (fabs(term) >= epsilon && k <= max_iter);<br>
+        <br>
+        printf("Результат S = %.10lf, число членов = %d\n", S, k-1);
+    </div>
+
+    <h2>✅ Соответствие ГОСТ 19.701-90 (ISO 5807-85)</h2>
+    <div class="note">
+        <ul style="margin-left: 1.5rem;">
+            <li>✔️ <strong>Символы:</strong> терминатор, процесс, решение, данные (параллелограмм) — соответствуют стандарту.</li>
+            <li>✔️ <strong>Линии потока:</strong> только вертикальные и горизонтальные.</li>
+            <li>✔️ <strong>Стрелки:</strong> только на линии снизу-вверх (возврат цикла) и справа-налево (аварийный выход).</li>
+            <li>✔️ <strong>Подписи «Да»/«Нет»:</strong> размещены вдоль линий, не пересекают их.</li>
+            <li>✔️ <strong>Пересечения:</strong> дуга-мостик оформлена корректно, вертикальная линия не прерывается.</li>
+            <li>✔️ <strong>Текст:</strong> по центру символов, краткий.</li>
+        </ul>
+    </div>
+
+    <footer>
+        ГОСТ 19.701-90 (ISO 5807-85) «Схемы алгоритмов, программ, данных и систем»<br>
+        СТП ВятГУ 101-2004 | Лабораторная работа №5 — Циклические вычислительные процессы
+    </footer>
+</div>
+</body>
+</html>

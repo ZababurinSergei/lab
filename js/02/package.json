@@ -1,0 +1,14 @@
+{
+  "name": "nav-config-interpreter",
+  "version": "1.0.0",
+  "description": "Navigation config interpreter for treasure hunt",
+  "main": "solution.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node test-correct.js",
+    "start": "node solution.js"
+  },
+  "keywords": ["navigation", "routing", "pattern-matching"],
+  "author": "",
+  "license": "ISC"
+}

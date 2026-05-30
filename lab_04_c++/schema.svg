@@ -1,0 +1,155 @@
+<svg width="900" height="820" viewBox="0 0 500 820" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Стрелка для движения справа-налево (указывает ВЛЕВО) -->
+        <marker id="arrow-left" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+            <polygon points="10 0, 0 5, 10 10" fill="#1f3d38" />
+        </marker>
+        <style>
+            .proc { fill: #ffffff; stroke: #1f3d38; stroke-width: 1.2; }
+            .diam { fill: #ffffff; stroke: #1f3d38; stroke-width: 1.2; }
+            .io { fill: #ffffff; stroke: #1f3d38; stroke-width: 1.2; }
+            .term { fill: #ffffff; stroke: #1f3d38; stroke-width: 1.2; }
+            .connector { fill: #1f3d38; stroke: #1f3d38; stroke-width: 1; }
+            .dot { fill: #1f3d38; stroke: #1f3d38; stroke-width: 1; }
+            .txt { font-family: 'Times New Roman', serif; font-size: 10px; font-weight: 500; fill: #1f2e2b; text-anchor: middle; dominant-baseline: middle; }
+            .txts { font-family: 'Times New Roman', serif; font-size: 7.5px; fill: #2c5a52; text-anchor: middle; }
+            .edge { stroke: #1f3d38; stroke-width: 1; fill: none; }
+            .edge-left { stroke: #1f3d38; stroke-width: 1; fill: none; marker-end: url(#arrow-left); }
+            .yes { font-family: 'Times New Roman', serif; font-size: 8.5px; fill: #1f6d5c; font-style: italic; }
+            .no { font-family: 'Times New Roman', serif; font-size: 8.5px; fill: #b1622c; font-style: italic; }
+        </style>
+    </defs>
+
+    <!-- НАЧАЛО -->
+    <rect x="235" y="5" width="90" height="24" rx="12" class="term" />
+    <text x="280" y="21" class="txt">НАЧАЛО</text>
+    <line x1="280" y1="29" x2="280" y2="50" class="edge" />
+
+    <!-- Ввод x, y -->
+    <polygon points="280,50 370,66 280,82 190,66" class="io" />
+    <text x="280" y="70" class="txt">Ввод x, y</text>
+    <line x1="280" y1="82" x2="280" y2="110" class="edge" />
+
+    <!-- d = x² – y² -->
+    <rect x="210" y="110" width="140" height="28" class="proc" />
+    <text x="280" y="128" class="txt">d = x² – y²</text>
+    <line x1="280" y1="138" x2="280" y2="170" class="edge" />
+
+    <!-- РОМБ 1: d ≠ 0 ? -->
+    <polygon points="280,170 355,205 280,240 205,205" class="diam" />
+    <text x="280" y="210" class="txt">d ≠ 0 ?</text>
+
+    <!-- Ветка ДА - направо (без стрелки) -->
+    <line x1="355" y1="205" x2="460" y2="205" class="edge" />
+    <text x="407" y="197" class="yes">Да</text>
+    <line x1="460" y1="205" x2="460" y2="250" class="edge" />
+    <rect x="350" y="250" width="220" height="40" class="proc" />
+    <text x="460" y="265" class="txt">z = (2x+y)/(x+2y) + x²</text>
+    <text x="460" y="280" class="txts">(проверка x+2y≠0)</text>
+    <line x1="460" y1="290" x2="460" y2="510" class="edge" />
+
+    <!-- Ветка НЕТ - НАЛЕВО (стрелка указывает ВЛЕВО) -->
+    <line x1="205" y1="205" x2="130" y2="205" class="edge-left" />
+    <text x="167" y="197" class="no">Нет</text>
+    <line x1="130" y1="205" x2="130" y2="250" class="edge" />
+
+    <!-- РОМБ 2: d == 0 ? -->
+    <polygon points="130,250 200,285 130,320 60,285" class="diam" />
+    <text x="130" y="290" class="txt">d == 0 ?</text>
+
+    <!-- Да - направо (без стрелки) -->
+    <line x1="200" y1="285" x2="280" y2="285" class="edge" />
+    <text x="240" y="277" class="yes">Да</text>
+    <line x1="280" y1="285" x2="280" y2="330" class="edge" />
+
+    <!-- РОМБ 3: y ≥ 0 ? -->
+    <polygon points="280,330 355,365 280,400 205,365" class="diam" />
+    <text x="280" y="370" class="txt">y ≥ 0 ?</text>
+
+    <!-- Да - направо (без стрелки) -->
+    <line x1="355" y1="365" x2="450" y2="365" class="edge" />
+    <text x="402" y="357" class="yes">Да</text>
+    <line x1="450" y1="365" x2="450" y2="410" class="edge" />
+    <rect x="345" y="410" width="210" height="40" class="proc" />
+    <text x="450" y="425" class="txt">z = √(2x + y)</text>
+    <text x="450" y="440" class="txts">(ОДЗ: 2x+y ≥ 0)</text>
+    <line x1="450" y1="450" x2="450" y2="510" class="edge" />
+
+    <!-- Нет - НАЛЕВО (стрелка указывает ВЛЕВО) -->
+    <line x1="205" y1="365" x2="150" y2="365" class="edge-left" />
+    <text x="177" y="357" class="no">Нет</text>
+
+    <!-- НЕТ из ромба 2 - НАЛЕВО (стрелка указывает ВЛЕВО) -->
+    <line x1="60" y1="285" x2="30" y2="285" class="edge-left" />
+    <text x="45" y="277" class="no">Нет</text>
+    <line x1="30" y1="285" x2="30" y2="330" class="edge" />
+
+    <!-- РОМБ 4: d == 1 и y < 0 ? -->
+    <polygon points="30,330 100,365 30,400 -40,365" class="diam" />
+    <text x="30" y="370" class="txt">d==1 и y&lt;0 ?</text>
+
+    <!-- Да - направо (без стрелки) -->
+    <line x1="100" y1="365" x2="150" y2="365" class="edge" />
+    <text x="125" y="357" class="yes">Да</text>
+
+    <!-- ТОЧКА СЛИЯНИЯ -->
+    <circle cx="150" cy="365" r="3.5" class="dot" />
+
+    <line x1="150" y1="368.5" x2="150" y2="410" class="edge" />
+    <rect x="35" y="410" width="230" height="40" class="proc" />
+    <text x="150" y="425" class="txt">z = 2y / √(3 – x)</text>
+    <text x="150" y="440" class="txts">(проверка: 3-x > 0)</text>
+    <line x1="150" y1="450" x2="150" y2="510" class="edge" />
+
+    <!-- КРУЖОК A (слияние) -->
+    <circle cx="280" cy="510" r="7" class="connector" />
+    <text x="280" y="513" class="txt" fill="white" font-size="7">A</text>
+
+    <!-- Линия от ветки 1 - НАЛЕВО (стрелка указывает ВЛЕВО) -->
+    <line x1="460" y1="510" x2="287" y2="510" class="edge-left" />
+
+    <!-- Линия от ветки 2 - НАЛЕВО (стрелка указывает ВЛЕВО) -->
+    <line x1="450" y1="510" x2="287" y2="510" class="edge-left" />
+
+    <!-- Линия от ветки 3 - направо (без стрелки) -->
+    <line x1="150" y1="510" x2="273" y2="510" class="edge" />
+
+    <line x1="280" y1="517" x2="280" y2="570" class="edge" />
+
+    <!-- НЕТ из ромба 4 - НАЛЕВО (стрелка указывает ВЛЕВО) -->
+    <line x1="-40" y1="365" x2="-80" y2="365" class="edge-left" />
+    <text x="-60" y="357" class="no">Нет</text>
+    <line x1="-80" y1="365" x2="-80" y2="415" class="edge" />
+    <rect x="-180" y="415" width="200" height="40" class="proc" />
+    <text x="-80" y="430" class="txt">Ошибка:</text>
+    <text x="-80" y="445" class="txts">условия не выполн.</text>
+    <line x1="-80" y1="455" x2="-80" y2="620" class="edge" />
+
+    <!-- КРУЖОК C -->
+    <circle cx="280" cy="620" r="7" class="connector" />
+    <text x="280" y="623" class="txt" fill="white" font-size="7">C</text>
+
+    <!-- Линия от ошибки - направо (без стрелки) -->
+    <line x1="-80" y1="620" x2="273" y2="620" class="edge" />
+
+    <line x1="280" y1="570" x2="280" y2="613" class="edge" />
+    <line x1="280" y1="627" x2="280" y2="670" class="edge" />
+
+    <!-- ВЫВОД -->
+    <polygon points="280,670 375,686 280,702 185,686" class="io" />
+    <text x="280" y="690" class="txt">Вывод z / ошибка</text>
+    <line x1="280" y1="702" x2="280" y2="740" class="edge" />
+
+    <!-- КОНЕЦ -->
+    <rect x="230" y="740" width="100" height="24" rx="12" class="term" />
+    <text x="280" y="756" class="txt">КОНЕЦ</text>
+
+    <!-- Подписи -->
+    <text x="530" y="199" class="txts" fill="#2a7a6e">● ветвь 1</text>
+    <text x="515" y="359" class="txts" fill="#2a7a6e">● ветвь 2</text>
+    <text x="195" y="465" class="txts" fill="#2a7a6e">● ветвь 3</text>
+    <text x="90" y="470" class="txts" fill="#aa4c2c">⚠️ обработка ошибок</text>
+
+    <text x="280" y="800" class="txts" fill="#5a7871">※ Стрелки ТОЛЬКО на линиях, идущих СПРАВА-НАЛЕВО</text>
+    <text x="280" y="815" class="txts" fill="#5a7871">※ Стрелки указывают ВЛЕВО (по направлению потока)</text>
+</svg>

@@ -1,0 +1,168 @@
+/**
+ * АЛГОРИТМ РАБОТЫ CSS-МАШИНЫ ГОЛДБЕРГА (v4)
+ * =========================================
+ * 
+ * ИЗМЕНЕНИЯ: Сквозное замедление движения шарика
+ * - Быстрый старт, плавное замедление к концу
+ * - Удар в 2.8s синхронно с var(--t-domino-start)
+ * 
+ * ФАЗА 2: ДВИЖЕНИЕ ШАРИКА (0.1s - 2.8s) С ЗАМЕДЛЕНИЕМ
+ * ┌─────────────────────────────────────────────────────────────────┐
+ * │ Сегмент A: moveRight (вправо)                                   │
+ * │ - Начало: 0.1s                                                  │
+ * │ - Длительность: 1.2s                                            │
+ * │ - Конец: 1.3s                                                   │
+ * │ - Функция: cubic-bezier(0.15, 0.85, 0.35, 1.0)                  │
+ * │   (быстрый старт, замедление к концу)                           │
+ * ├─────────────────────────────────────────────────────────────────┤
+ * │ Сегмент B: moveDown (вниз)                                      │
+ * │ - Начало: 1.3s                                                  │
+ * │ - Длительность: 0.8s                                            │
+ * │ - Конец: 2.1s                                                   │
+ * │ - Функция: cubic-bezier(0.25, 0.8, 0.4, 1.0)                    │
+ * │   (умеренное замедление)                                        │
+ * ├─────────────────────────────────────────────────────────────────┤
+ * │ Сегмент C: moveLeft (влево)                                     │
+ * │ - Начало: 2.1s                                                  │
+ * │ - Длительность: 0.7s                                            │
+ * │ - Конец: 2.8s                                                   │
+ * │ - Функция: cubic-bezier(0.3, 0.7, 0.5, 1.0)                     │
+ * │   (плавное замедление, мягкий удар)                             │
+ * └─────────────────────────────────────────────────────────────────┘
+ * 
+ * ВРЕМЕННАЯ ДИАГРАММА (v4):
+ * ========================
+ * 0.00s ┬──── :checked
+ * 0.05s ├──── gate.start
+ * 0.10s ├──── ball.moveRight.start (быстрый старт)
+ * 0.45s ├──── gate.end
+ * 1.30s ├──── ball.moveRight.end
+ * 1.30s ├──── ball.moveDown.start
+ * 2.10s ├──── ball.moveDown.end
+ * 2.10s ├──── ball.moveLeft.start
+ * 2.80s ├──── ball.moveLeft.end → УДАР (плавно)
+ * 2.80s ├──── domino.start
+ * 5.05s └──── flag.show
+ */
+
+/* АНИМАЦИИ ШАРИКА - сквозное замедление */
+.start:checked ~ .scene .ball {
+    animation:
+            moveRight 1.2s 0.1s cubic-bezier(0.15, 0.85, 0.35, 1.0) forwards,
+            moveDown 0.8s 1.3s cubic-bezier(0.25, 0.8, 0.4, 1.0) forwards,
+            moveLeft 0.7s 2.1s cubic-bezier(0.3, 0.7, 0.5, 1.0) forwards;
+}
+
+@keyframes moveRight {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(36.8vw) translateY(0); }
+}
+
+@keyframes moveDown {
+    0% { transform: translateX(36.8vw) translateY(0); }
+    100% { transform: translateX(36.8vw) translateY(6.24vw); }
+}
+
+@keyframes moveLeft {
+    0% { transform: translateX(36.8vw) translateY(6.24vw); }
+    100% { transform: translateX(31.2vw) translateY(6.24vw); }
+}
+
+/* ФАЗА 1: ОТКРЫТИЕ ВОРОТ */
+.start:checked ~ .scene .gate {
+    transform: perspective(400px) rotateX(78deg);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.2, 1) 0.05s;
+}
+
+/* ФАЗА 3: ПАДЕНИЕ ДОМИНО */
+.start:checked ~ .scene .domino {
+    animation: fall 0.6s ease-in forwards;
+    animation-delay: calc(var(--t-domino-start) + (var(--i) * var(--domino-step)));
+}
+
+/* ФАЗА 4: ФЛАГ УСПЕХА */
+.start:checked ~ .scene .flag .light {
+    transition-delay: var(--t-success);
+    opacity: 1;
+}
+
+.start:checked ~ .scene .flag span {
+    animation: pop 0.6s var(--t-success) both;
+}
+
+/* СТАТУС */
+.start:checked ~ .scene [data-test="status"] {
+    color: var(--ok);
+    background: rgba(158, 255, 143, 0.12);
+    border-color: rgba(158, 255, 143, 0.25);
+    font-size: 0;
+}
+
+.start:checked ~ .scene [data-test="status"]::before {
+    content: "RUNNING";
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    display: inline-block;
+}
+
+/* ДЕАКТИВАЦИЯ */
+.start:not(:checked) ~ .scene .ball {
+    animation: none;
+    transform: translateX(0) translateY(0);
+}
+
+.start:not(:checked) ~ .scene .gate {
+    transform: perspective(400px) rotateX(0);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.start:not(:checked) ~ .scene .domino {
+    animation: none;
+    transform: rotate(0deg);
+}
+
+.start:not(:checked) ~ .scene .flag .light {
+    transition-delay: 0s;
+    opacity: 0;
+}
+
+.start:not(:checked) ~ .scene .flag span {
+    animation: none;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+}
+
+.start:not(:checked) ~ .scene [data-test="status"] {
+    color: var(--accent);
+    background: rgba(110, 231, 255, 0.08);
+    border-color: rgba(110, 231, 255, 0.15);
+    font-size: 0;
+}
+
+.start:not(:checked) ~ .scene [data-test="status"]::before {
+    content: "IDLE";
+    font-size: 12px;
+    letter-spacing: 0.4px;
+}
+
+/* КЛЮЧЕВЫЕ КАДРЫ */
+@keyframes fall {
+    to {
+        transform: rotate(-78deg);
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: translateY(10px) scale(0.95);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(-4px) scale(1.06);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}

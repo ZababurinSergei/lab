@@ -1,0 +1,161 @@
+<div class="MainPage_MainPage-Panels__4yVJg"><div role="tabpanel" tabindex="0" aria-labelledby="tab-description" class="MainPage_MainPage-Panel__d1nfr" style=""><div class="Problem_Problem__A3pPc"><div class="Problem_Problem-Wrapper__UNSkZ"><div class="Problem_Problem-Head__aUOI9"><h1 class="Text Text_color_primary Text_weight_medium Text_typography_titleS Problem_Problem-Header___KgU5">Git-граффити</h1></div><div><section data-testid="legend"><div class="StatementSection_StatementSection-Html__kBZ0W"><p><img src="https://assets.contest.yandex.net/testsys/statement-file?hash=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..Qr0_PDGU68_3n_2b.MSFDSIm6iuDo664AwBUoGh3grgzPIXNG7VL50AW68s1IcamCbxJt1GgdigVO8BgaTNsyuIAm0jxv3LMhjko3Bzv4TID8MOY.Op5biuy2xv3EW__kkAgA6w" alt="header"></p>
+    <p>Ваша задача — написать скрипт, который создаёт коммиты в git-репозитории так, чтобы на GitHub/GitLab contribution graph (heatmap) отобразился заданный паттерн.</p>
+    <h2 id="входные-данные">Входные данные</h2>
+    <p>Скрипт получает путь к JSON-файлу с массивом цветов:</p>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="bash hljs language-bash" data-highlighted="yes">node solution.js test.json</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <h3 id="формат-testjson">Формат test.json</h3>
+    <p>Массив HEX-цветов, соответствующих ячейкам heatmap:</p>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="json hljs language-json" data-highlighted="yes"><span class="hljs-punctuation">[</span><span class="hljs-string">"#ebedf0"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"#9be9a8"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"#40c463"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"#30a14e"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"#216e39"</span><span class="hljs-punctuation">,</span> ...<span class="hljs-punctuation">]</span></code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <h3 id="соответствие-цветов-и-уровней-активности">Соответствие цветов и уровней активности</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Цвет</th>
+            <th>Уровень</th>
+            <th>Коммитов для достижения</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>#ebedf0</code></td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><code>#9be9a8</code></td>
+            <td>1</td>
+            <td>1-2</td>
+        </tr>
+        <tr>
+            <td><code>#40c463</code></td>
+            <td>2</td>
+            <td>3-5</td>
+        </tr>
+        <tr>
+            <td><code>#30a14e</code></td>
+            <td>3</td>
+            <td>6-10</td>
+        </tr>
+        <tr>
+            <td><code>#216e39</code></td>
+            <td>4</td>
+            <td>11+</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 id="структура-сетки-heatmap">Структура сетки heatmap</h2>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="hljs language-undefined" data-highlighted="yes">         Недели (колонки: ~53)
+         ←―――――――――――――――――――――――→
+      ┌─────────────────────────────┐
+    0 │ Sun Sun Sun ... Sun Sun     │  ↑
+    1 │ Mon Mon Mon ... Mon Mon     │  │
+    2 │ Tue Tue Tue ... Tue Tue     │  7 строк
+    3 │ Wed Wed Wed ... Wed Wed     │  (дни недели)
+    4 │ Thu Thu Thu ... Thu Thu     │  │
+    5 │ Fri Fri Fri ... Fri Fri     │  │
+    6 │ Sat Sat Sat ... Sat Sat     │  ↓
+      └─────────────────────────────┘
+        ↑                       ↑
+     ~год назад              сегодня</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <h3 id="особенности-сетки">Особенности сетки</h3>
+    <ol type="1">
+        <li><strong>7 строк</strong> — дни недели (0 = воскресенье, 6 = суббота)</li>
+        <li><strong>~53 колонки</strong> — недели за последний год</li>
+        <li><strong>Jagged grid</strong> — количество колонок в разных строках может отличаться на 1:
+            <ul>
+                <li>Строки от 0 до <code>todayDayOfWeek</code> имеют на 1 колонку больше</li>
+                <li>Это связано с тем, что текущая неделя ещё не завершена</li>
+            </ul></li>
+    </ol>
+    <h3 id="расчёт-дат">Расчёт дат</h3>
+    <ol type="1">
+        <li>
+            <p><strong>Начальная дата (startDate)</strong>:</p>
+            <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="hljs language-undefined" data-highlighted="yes">startDate = сегодня - 364 дня
+startDate = выровнять к предыдущему воскресенью</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div></li>
+        <li>
+            <p><strong>Дата ячейки (row, col)</strong>:</p>
+            <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="hljs language-sql" data-highlighted="yes">cellDate <span class="hljs-operator">=</span> startDate <span class="hljs-operator">+</span> (col <span class="hljs-operator">*</span> <span class="hljs-number">7</span>) <span class="hljs-operator">+</span> <span class="hljs-type">row</span> дней</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div></li>
+    </ol>
+    <h3 id="порядок-элементов-в-массиве">Порядок элементов в массиве</h3>
+    <p>Цвета в массиве идут <strong>построчно</strong> (row-major):</p>
+    <ul>
+        <li>Сначала все ячейки строки 0 (воскресенья)</li>
+        <li>Затем все ячейки строки 1 (понедельники)</li>
+        <li>И так далее...</li>
+    </ul>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="hljs language-css" data-highlighted="yes">Индекс в массиве:
+Row <span class="hljs-number">0</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, ..., <span class="hljs-built_in">numCols</span>(<span class="hljs-number">0</span>)-<span class="hljs-number">1</span>]
+Row <span class="hljs-number">1</span>: [<span class="hljs-built_in">numCols</span>(<span class="hljs-number">0</span>), <span class="hljs-built_in">numCols</span>(<span class="hljs-number">0</span>)+<span class="hljs-number">1</span>, ...]
+Row <span class="hljs-number">2</span>: [<span class="hljs-built_in">numCols</span>(<span class="hljs-number">0</span>)+<span class="hljs-built_in">numCols</span>(<span class="hljs-number">1</span>), ...]
+...</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <h2 id="создание-коммитов">Создание коммитов</h2>
+    <p>Для отрисовки heatmap необходимо создавать <strong>пустые коммиты</strong> с заданной датой:</p>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">const</span> timestamp = <span class="hljs-string">"2025-03-15T12:30:45"</span>;
+<span class="hljs-title function_">execSync</span>(<span class="hljs-string">`git commit --allow-empty -m "Activity commit <span class="hljs-subst">${timestamp}</span>"`</span>, {
+  <span class="hljs-attr">env</span>: {
+    ...process.<span class="hljs-property">env</span>,
+    <span class="hljs-attr">GIT_AUTHOR_DATE</span>: timestamp,
+    <span class="hljs-attr">GIT_COMMITTER_DATE</span>: timestamp,
+  }
+});</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <h3 id="рекомендуемое-количество-коммитов">Рекомендуемое количество коммитов</h3>
+    <p>Для надёжного достижения нужного уровня рекомендуется создавать:</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Уровень</th>
+            <th>Минимум коммитов</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>11</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 id="пример">Пример</h2>
+    <p>Для test-example.json, содержащего паттерн в виде ромба:</p>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="hljs language-undefined" data-highlighted="yes">. . . . . . . .
+. ◦ . . . ◦ . .
+. . ◦ ◦ ◦ . . .
+. . . ● . . . .
+. . ◦ ◦ ◦ . . .
+. ◦ . . . ◦ . .
+. . . . . . . .</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <p>Где:</p>
+    <ul>
+        <li><code>.</code> = #ebedf0 (level 0)</li>
+        <li><code>◦</code> = #9be9a8 (level 1)</li>
+        <li><code>●</code> = #40c463 (level 2)</li>
+    </ul>
+    <h2 id="проверка-решения">Проверка решения</h2>
+    <ol type="1">
+        <li>Скрипт запускается в репозитории участника</li>
+        <li>После выполнения собираются даты всех коммитов</li>
+        <li>Строится heatmap на основе созданных коммитов</li>
+        <li>Сравнивается с эталонным heatmap</li>
+    </ol>
+    <h2 id="ограничения">Ограничения</h2>
+    <ul>
+        <li>Время выполнения: 5 минут</li>
+        <li>Даты коммитов не могут быть в будущем</li>
+        <li>Формат сообщения коммита: <code>Activity commit YYYY-MM-DDTHH:MM:SS</code></li>
+    </ul></div></section><section></section></div></div></div></div></div>

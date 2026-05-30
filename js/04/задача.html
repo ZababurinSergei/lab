@@ -1,0 +1,71 @@
+<div class="MainPage_MainPage-Panels__4yVJg"><div role="tabpanel" tabindex="0" aria-labelledby="tab-description" class="MainPage_MainPage-Panel__d1nfr" style=""><div class="Problem_Problem__A3pPc"><div class="Problem_Problem-Wrapper__UNSkZ"><div class="Problem_Problem-Head__aUOI9"><h1 class="Text Text_color_primary Text_weight_medium Text_typography_titleS Problem_Problem-Header___KgU5">JSON patch</h1></div><div><section data-testid="legend"><div class="StatementSection_StatementSection-Html__kBZ0W"><h1 id="условие-задачи">Условие задачи</h1>
+    <p>Реализуйте функцию <code>jsonPatch</code>, которая применяет набор трансформаций к JSON-объекту.</p>
+    <p>Функция принимает два параметра:</p>
+    <ul>
+        <li><code>obj</code> — произвольный JSON-объект (может содержать объекты, массивы, примитивные значения)</li>
+        <li><code>transformations</code> — массив функций-трансформаций</li>
+    </ul>
+    <p>Каждая функция-трансформация принимает два аргумента:</p>
+    <ol type="1">
+        <li><code>path</code> — массив строк и чисел, представляющий путь к текущему узлу в дереве объекта (строка для поля объекта, число для индекса массива)</li>
+        <li><code>value</code> — текущее значение узла</li>
+    </ol>
+    <p>Трансформация может вернуть:</p>
+    <ul>
+        <li><code>undefined</code> — узел остается без изменений</li>
+        <li><code>null</code> — узел удаляется из результата</li>
+        <li>любое другое значение — узел заменяется на это значение</li>
+    </ul>
+    <h1 id="алгоритм-работы">Алгоритм работы</h1>
+    <ol type="1">
+        <li>Функция рекурсивно обходит все узлы дерева объекта.</li>
+        <li>Для каждого узла применяются все трансформации в порядке их следования в массиве. Каждая трансформация получает один и тот же вход: текущее значение узла (уже обработанное рекурсивно для вложенных объектов и массивов). Результат предыдущей трансформации следующей не передаётся — трансформации не накопительные.</li>
+        <li>Если несколько трансформаций возвращают не-<code>undefined</code> значения, используется результат последней из них (последняя «перекрывает» предыдущие, в том числе перекрыть может и <code>null</code>).</li>
+        <li>После применения трансформаций, если результат является объектом или массивом, он также рекурсивно обрабатывается.</li>
+        <li>Узлы, для которых итоговый результат трансформаций — <code>null</code>, удаляются из результата.</li>
+        <li>Удаление элементов из массива: результирующий массив получается сжатием — удалённые элементы не оставляют «дыр»; индексы следующих элементов сдвигаются.</li>
+    </ol>
+    <h1 id="формат-функции">Формат функции</h1>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="javascript hljs language-javascript" data-highlighted="yes"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">jsonPatch</span>(<span class="hljs-params">obj, transformations</span>) {
+  <span class="hljs-comment">// ваша реализация</span>
+}</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <h1 id="пример">Пример</h1>
+    <p><strong>Входные данные:</strong></p>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="javascript hljs language-javascript" data-highlighted="yes">obj = {
+  <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>,
+};
+
+transformations = [
+  <span class="hljs-function">(<span class="hljs-params">path, value</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> value === <span class="hljs-string">"number"</span>) {
+      <span class="hljs-keyword">return</span> value * <span class="hljs-number">10</span>; <span class="hljs-comment">// умножить все числа на 10</span>
+    }
+  },
+  <span class="hljs-function">(<span class="hljs-params">path</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (path.<span class="hljs-property">length</span> === <span class="hljs-number">1</span> &amp;&amp; path[<span class="hljs-number">0</span>] === <span class="hljs-string">"b"</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; <span class="hljs-comment">// удалить 'b' (последняя трансформация — её результат применяется)</span>
+    }
+  },
+];</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <p><strong>Результат:</strong></p>
+    <div class="code"><div class="CodeSnippet_CodeSnippet__36Jyi undefined"><div class="CodeSnippet_CodeSnippet-Header__gW7uy"><div class="CodeSnippet_CodeSnippet-Toolbar__rWHoz"><button class="CodeSnippet_CodeSnippet-Button__tOz7_" aria-label="Копировать в буфер обмена"><span data-icon="copy" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat" aria-hidden="true" style="--hr-icon-color: var(--hr-color-text-primary);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M2 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4zm4-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M21 16a1 1 0 0 0 1-1V9a7 7 0 0 0-7-7H9a1 1 0 1 0 0 2h6a5 5 0 0 1 5 5v6a1 1 0 0 0 1 1" clip-rule="evenodd"></path></svg></span><span data-icon="close" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L12 10.586l6.293-6.293a1 1 0 1 1 1.414 1.414L13.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414L12 13.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L10.586 12 4.293 5.707a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path></svg></span><span data-icon="check" class="Icon Icon_direction_top Icon_size_s Icon_sizeManagement_self Icon_hasGlyph Icon_newFormat CopyToClipboard_CopyToClipboard-StateIcon__QKZmT" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-11 11a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L10 15.586 20.293 5.293a1 1 0 0 1 1.414 0" clip-rule="evenodd"></path></svg></span></button></div></div><pre class="Highlight_Highlight__GMzCf Highlight_Highlight_withLineNumbers__tzIB8 Highlight_Highlight_root__G3eBU CodeSnippet_CodeSnippet-Code__CBRAd"><code class="javascript hljs language-javascript" data-highlighted="yes">{
+  <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>; <span class="hljs-comment">// 'b' удалён, 'a' умножен на 10</span>
+}</code><span aria-hidden="true" class="line-numbers-rows"><span style="height: 21px;"></span><span style="height: 21px;"></span><span style="height: 21px;"></span></span><span aria-hidden="true" class="line-numbers-sizer"></span></pre></div></div>
+    <p>Порядок трансформаций важен: если бы удаление <code>b</code> шло первым, а умножение вторым, то для <code>b</code> последним был бы результат второй трансформации (20), и поле <code>b</code> осталось бы в объекте.</p>
+    <h1 id="примечания">Примечания</h1>
+    <ul>
+        <li>Путь к корневому объекту — пустой массив <code>[]</code>.</li>
+        <li>Путь к полю объекта — массив с именем поля: <code>['fieldName']</code>.</li>
+        <li>Путь к элементу массива — массив с индексом: <code>['arrayName', 0]</code>.</li>
+        <li>Путь к вложенному полю — массив с путём: <code>['parent', 'child']</code>.</li>
+        <li>Если корневой объект удаляется (итоговый результат трансформаций — <code>null</code>), функция должна вернуть <code>undefined</code>.</li>
+        <li>Заменённые объекты и массивы также должны обрабатываться рекурсивно.</li>
+        <li>При удалении элементов массива (возврат <code>null</code> для элемента) массив сжимается: дыр в индексах нет.</li>
+    </ul>
+    <h1 id="ограничения">Ограничения</h1>
+    <ul>
+        <li>Гарантируется, что исходный объект не содержит <code>null</code> или <code>undefined</code> как значения полей</li>
+        <li>Все трансформации корректны и не вызывают ошибок</li>
+        <li>Размер объекта не превышает разумных пределов для рекурсивной обработки</li>
+    </ul></div></section><section></section></div></div></div></div><div role="tabpanel" tabindex="-1" aria-labelledby="tab-submissions" class="MainPage_MainPage-Panel__d1nfr" style="display: none;"></div></div>

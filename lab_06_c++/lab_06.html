@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Блок-схема ЛР6 Вариант 9 (ГОСТ 19.701-90)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times New Roman', 'Georgia', serif;
+            background: #f5f5f0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        svg {
+            display: block;
+            margin: 0 auto;
+            font-family: 'Times New Roman', serif;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1a4a44;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #5a6e6a;
+            border-top: 1px solid #ddd;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="title">Блок-схема алгоритма (вариант 9)</div>
+    <svg width="800" height="1150" viewBox="0 0 850 1150" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Определение стрелок -->
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="black"/>
+            </marker>
+            <marker id="arrow-up" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="black"/>
+            </marker>
+        </defs>
+
+        <!-- ===== ТЕРМИНАТОР: НАЧАЛО ===== -->
+        <rect x="280" y="20" width="200" height="50" rx="25" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="52" font-size="18" font-weight="bold" text-anchor="middle" fill="black">НАЧАЛО</text>
+
+        <!-- Стрелка вниз (сверху вниз — стрелка не нужна по ГОСТ) -->
+        <line x1="380" y1="70" x2="380" y2="110" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПАРАЛЛЕЛОГРАММ: ВВОД n ===== -->
+        <polygon points="380,110 580,150 380,190 180,150" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="157" font-size="16" font-weight="bold" text-anchor="middle" fill="black">Ввод n</text>
+
+        <line x1="380" y1="190" x2="380" y2="230" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПРЯМОУГОЛЬНИК: выделение памяти ===== -->
+        <rect x="220" y="230" width="320" height="50" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="262" font-size="15" text-anchor="middle" fill="black">Выделение памяти под массив</text>
+
+        <line x1="380" y1="280" x2="380" y2="320" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПАРАЛЛЕЛОГРАММ: ВВОД МАССИВА ===== -->
+        <polygon points="380,320 620,365 380,410 140,365" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="373" font-size="16" font-weight="bold" text-anchor="middle" fill="black">Ввод массива arr</text>
+
+        <line x1="380" y1="410" x2="380" y2="450" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПРЯМОУГОЛЬНИК: ИНИЦИАЛИЗАЦИЯ ===== -->
+        <rect x="200" y="450" width="360" height="50" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="475" font-size="14" text-anchor="middle" fill="black">neg_count = 0, min_abs = |arr[0]|</text>
+        <text x="380" y="492" font-size="14" text-anchor="middle" fill="black">min_abs_idx = 0, i = 0</text>
+
+        <line x1="380" y1="500" x2="380" y2="540" stroke="black" stroke-width="2"/>
+
+        <!-- ===== РОМБ: УСЛОВИЕ ЦИКЛА i < n ? ===== -->
+        <polygon points="380,540 540,590 380,640 220,590" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="597" font-size="16" font-weight="bold" text-anchor="middle" fill="black">i &lt; n ?</text>
+
+        <!-- Выход "НЕТ" (вправо) — стрелка нужна, т.к. направление нестандартное -->
+        <line x1="540" y1="590" x2="620" y2="590" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="565" y="580" font-size="15" fill="black">НЕТ</text>
+
+        <!-- Выход "ДА" (вниз) — стрелка не нужна (сверху вниз) -->
+        <line x1="380" y1="640" x2="380" y2="680" stroke="black" stroke-width="2"/>
+        <text x="405" y="665" font-size="15" fill="black">ДА</text>
+
+        <!-- ===== ПРЯМОУГОЛЬНИК: ПРОВЕРКА arr[i] < 0 ===== -->
+        <rect x="230" y="680" width="300" height="45" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="708" font-size="14" text-anchor="middle" fill="black">Если arr[i] &lt; 0, то neg_count++</text>
+
+        <line x1="380" y1="725" x2="380" y2="765" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПРЯМОУГОЛЬНИК: ОБНОВЛЕНИЕ МИНИМУМА ===== -->
+        <rect x="210" y="765" width="340" height="45" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="790" font-size="13" text-anchor="middle" fill="black">Если |arr[i]| &lt; min_abs, то</text>
+        <text x="380" y="805" font-size="13" text-anchor="middle" fill="black">min_abs = |arr[i]|, min_abs_idx = i</text>
+
+        <line x1="380" y1="810" x2="380" y2="845" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПРЯМОУГОЛЬНИК: i++ ===== -->
+        <rect x="300" y="845" width="160" height="40" fill="white" stroke="black" stroke-width="2"/>
+        <text x="380" y="871" font-size="15" text-anchor="middle" fill="black">i++</text>
+
+        <!-- Возврат на ромб условия (смещённое объединение по ГОСТ, линия НЕ пересекает блоки) -->
+        <!-- Идём вниз, затем влево в обход всех блоков, затем вверх к ромбу -->
+        <line x1="380" y1="885" x2="380" y2="920" stroke="black" stroke-width="2"/>
+        <line x1="380" y1="920" x2="60" y2="920" stroke="black" stroke-width="2"/>
+        <!-- Стрелка перед поворотом вверх -->
+        <line x1="60" y1="920" x2="60" y2="590" stroke="black" stroke-width="2" marker-end="url(#arrow-up)"/>
+        <line x1="60" y1="590" x2="220" y2="590" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПРЯМОУГОЛЬНИК (после цикла): ВЫВОД neg_count ===== -->
+        <!-- Линия от выхода "НЕТ" идёт сначала вправо, потом вниз -->
+        <rect x="640" y="700" width="120" height="45" fill="white" stroke="black" stroke-width="2" rx="4"/>
+        <text x="700" y="722" font-size="13" text-anchor="middle" fill="black">Вывод</text>
+        <text x="700" y="737" font-size="13" text-anchor="middle" fill="black">neg_count</text>
+
+        <!-- Стрелка на входе в блок (движение справа налево? нет, сверху вниз по вертикали) -->
+        <!-- Но сначала нужно дойти до этого блока: от выхода "НЕТ" (620,590) вниз до 700, потом вправо -->
+        <line x1="620" y1="590" x2="620" y2="660" stroke="black" stroke-width="2"/>
+        <line x1="620" y1="660" x2="700" y2="660" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="700" y1="660" x2="700" y2="700" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПРЯМОУГОЛЬНИК: ЗАМЕНА ЗНАКА ===== -->
+        <rect x="640" y="780" width="120" height="50" fill="white" stroke="black" stroke-width="2" rx="4"/>
+        <text x="700" y="803" font-size="11" text-anchor="middle" fill="black">arr[min_abs_idx]</text>
+        <text x="700" y="816" font-size="11" text-anchor="middle" fill="black">= -arr[min_abs_idx]</text>
+
+        <!-- Стрелка от предыдущего блока -->
+        <line x1="700" y1="745" x2="700" y2="780" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <line x1="700" y1="830" x2="700" y2="870" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ПАРАЛЛЕЛОГРАММ: ВЫВОД МАССИВА ===== -->
+        <polygon points="700,870 840,910 700,950 560,910" fill="white" stroke="black" stroke-width="2"/>
+        <text x="700" y="917" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Вывод массива</text>
+
+        <line x1="700" y1="950" x2="700" y2="990" stroke="black" stroke-width="2"/>
+
+        <!-- ===== ТЕРМИНАТОР: КОНЕЦ ===== -->
+        <rect x="610" y="990" width="180" height="50" rx="25" fill="white" stroke="black" stroke-width="2"/>
+        <text x="700" y="1022" font-size="18" font-weight="bold" text-anchor="middle" fill="black">КОНЕЦ</text>
+
+        <!-- Стрелка на входе в терминатор -->
+        <line x1="700" y1="990" x2="700" y2="1015" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+    </svg>
+    <div class="footer">
+        ГОСТ 19.701-90 (ISO 5807-85) — Схемы алгоритмов, программ, данных и систем<br>
+        ✅ Слияние ветвей выполнено <strong>смещённым объединением</strong> (без кружка-соединителя)<br>
+        ✅ Линии потока — только вертикальные и горизонтальные, <strong>не пересекают блоки</strong><br>
+        ✅ Стрелки установлены везде, где направление потока <strong>не сверху вниз и не слева направо</strong>
+    </div>
+</div>
+</body>
+</html>

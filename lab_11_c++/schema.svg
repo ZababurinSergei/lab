@@ -1,0 +1,154 @@
+<svg width="750" height="1650" viewBox="0 0 750 1650" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <marker id="arrowDown" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="black"/>
+        </marker>
+        <marker id="arrowRight" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="black"/>
+        </marker>
+    </defs>
+
+    <!-- ========== 1. НАЧАЛО ========== -->
+    <rect x="275" y="10" width="150" height="40" rx="20" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="350" y="36" font-size="16" font-weight="bold" text-anchor="middle" font-style="italic">Начало</text>
+    <line x1="350" y1="50" x2="350" y2="80" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 2. ВВОД rows, cols ========== -->
+    <polygon points="270,80 430,80 400,125 240,125" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="335" y="105" font-size="14" text-anchor="middle" font-weight="bold" font-style="italic">Ввод rows, cols</text>
+    <line x1="335" y1="125" x2="335" y2="155" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 3. РОМБ: rows>0 и cols>0 ? ========== -->
+    <!-- Центр ромба: x=335, y=195, ширина 140, высота 80 -->
+    <polygon points="335,155 405,195 335,235 265,195" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="335" y="200" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">rows>0</text>
+    <text x="335" y="215" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">и cols>0?</text>
+
+    <!-- Выход "Нет" (вправо) -->
+    <line x1="405" y1="195" x2="480" y2="195" stroke="black" stroke-width="1.8"/>
+    <text x="440" y="185" font-size="14" fill="#b44" font-weight="bold">Нет</text>
+
+    <!-- Блок вывода ошибки -->
+    <polygon points="480,170 560,170 540,220 460,220" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="510" y="200" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">Вывод</text>
+    <text x="510" y="215" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">ошибки</text>
+
+    <line x1="510" y1="220" x2="510" y2="250" stroke="black" stroke-width="1.8"/>
+
+    <!-- КОНЕЦ при ошибке -->
+    <rect x="435" y="250" width="150" height="40" rx="20" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="510" y="276" font-size="16" font-weight="bold" text-anchor="middle" font-style="italic">Конец</text>
+
+    <!-- Выход "Да" (вниз из ромба) -->
+    <line x1="335" y1="235" x2="335" y2="280" stroke="black" stroke-width="1.8"/>
+    <text x="310" y="260" font-size="14" fill="#1a6b5e" font-weight="bold">Да</text>
+
+    <!-- ========== 4. ВЫДЕЛЕНИЕ ПАМЯТИ ========== -->
+    <rect x="185" y="280" width="300" height="45" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="335" y="300" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Выделение памяти под matrix,</text>
+    <text x="335" y="317" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">max_abs_values, original_max_abs</text>
+    <line x1="335" y1="325" x2="335" y2="355" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 5. ЗАПОЛНЕНИЕ СЛУЧАЙНЫМИ ЧИСЛАМИ ========== -->
+    <polygon points="255,355 415,355 385,405 225,405" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="380" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Заполнение matrix</text>
+    <text x="320" y="397" font-size="11" text-anchor="middle">случайными числами [-50..50]</text>
+    <line x1="320" y1="405" x2="320" y2="435" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 6. ВЫВОД ИСХОДНОГО МАССИВА ========== -->
+    <polygon points="255,435 415,435 385,485 225,485" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="465" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Вывод исходного массива</text>
+    <line x1="320" y1="485" x2="320" y2="515" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 7. ЦИКЛ: вычисление max|элемент| ========== -->
+    <rect x="160" y="515" width="320" height="45" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="535" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">Для каждого столбца j = 0..cols-1:</text>
+    <text x="320" y="553" font-size="12" text-anchor="middle">вычислить max|элемент| в столбце</text>
+    <line x1="320" y1="560" x2="320" y2="590" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 8. ВЫВОД ХАРАКТЕРИСТИК ========== -->
+    <polygon points="255,590 415,590 385,640 225,640" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="620" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Вывод max|элемент|</text>
+    <line x1="320" y1="640" x2="320" y2="670" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 9. СОХРАНЕНИЕ ИСХОДНЫХ ЗНАЧЕНИЙ ========== -->
+    <rect x="190" y="670" width="260" height="40" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="690" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">Сохранить original_max_abs</text>
+    <text x="320" y="705" font-size="11" text-anchor="middle">для сравнительной таблицы</text>
+    <line x1="320" y1="710" x2="320" y2="740" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 10. СОРТИРОВКА ВЫБОРОМ ========== -->
+    <rect x="110" y="740" width="420" height="45" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="758" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">Сортировка выбором: for i = 0 to cols-2</text>
+    <text x="320" y="776" font-size="12" text-anchor="middle">найти столбец с минимальным max|элемент|</text>
+    <line x1="320" y1="785" x2="320" y2="815" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 11. РОМБ: min_index != i ? ========== -->
+    <polygon points="320,815 390,855 320,895 250,855" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="860" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">min_index</text>
+    <text x="320" y="875" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">!= i ?</text>
+
+    <!-- Выход "Да" (вправо) -->
+    <line x1="390" y1="855" x2="460" y2="855" stroke="black" stroke-width="1.8"/>
+    <text x="425" y="845" font-size="14" fill="#1a6b5e" font-weight="bold">Да</text>
+
+    <!-- Блок обмена -->
+    <rect x="460" y="830" width="200" height="50" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="560" y="852" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">Обменять столбцы i</text>
+    <text x="560" y="870" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">и min_index</text>
+
+    <line x1="560" y1="880" x2="560" y2="920" stroke="black" stroke-width="1.8"/>
+
+    <!-- Возврат от обмена к следующей итерации -->
+    <line x1="560" y1="920" x2="560" y2="960" stroke="black" stroke-width="1.8"/>
+    <line x1="560" y1="960" x2="320" y2="960" stroke="black" stroke-width="1.8"/>
+
+    <!-- Выход "Нет" (влево) -->
+    <line x1="250" y1="855" x2="170" y2="855" stroke="black" stroke-width="1.8"/>
+    <text x="210" y="845" font-size="14" fill="#b44" font-weight="bold">Нет</text>
+
+    <!-- Слияние ветвей (смещённое объединение по ГОСТ) -->
+    <line x1="170" y1="855" x2="170" y2="960" stroke="black" stroke-width="1.8"/>
+    <line x1="170" y1="960" x2="320" y2="960" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 12. ПЕРЕХОД К СЛЕДУЮЩЕМУ i ========== -->
+    <line x1="320" y1="960" x2="320" y2="1000" stroke="black" stroke-width="1.8"/>
+
+    <rect x="190" y="1000" width="260" height="35" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="1022" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">i = i + 1 (возврат к шагу 10)</text>
+
+    <line x1="320" y1="1035" x2="320" y2="1070" stroke="black" stroke-width="1.5"/>
+
+    <!-- ========== 13. ВЫВОД ОТСОРТИРОВАННОГО МАССИВА ========== -->
+    <polygon points="255,1070 415,1070 385,1120 225,1120" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="1100" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Вывод отсортированного</text>
+    <text x="320" y="1115" font-size="11" text-anchor="middle">массива и характеристик</text>
+    <line x1="320" y1="1120" x2="320" y2="1150" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 14. ПРОВЕРКА КОРРЕКТНОСТИ ========== -->
+    <rect x="190" y="1150" width="260" height="40" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="1170" font-size="12" text-anchor="middle" font-weight="bold" font-style="italic">Проверка: isSorted() ?</text>
+    <text x="320" y="1185" font-size="11" text-anchor="middle">(max|элемент| по возрастанию)</text>
+    <line x1="320" y1="1190" x2="320" y2="1220" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 15. КОНТРОЛЬНАЯ ПРОВЕРКА ========== -->
+    <polygon points="255,1220 415,1220 385,1270 225,1270" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="1250" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Контрольная проверка:</text>
+    <text x="320" y="1265" font-size="11" text-anchor="middle">пересчёт max|элемент|</text>
+    <line x1="320" y1="1270" x2="320" y2="1300" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 16. ВЫВОД СРАВНИТЕЛЬНОЙ ТАБЛИЦЫ ========== -->
+    <polygon points="255,1300 415,1300 385,1350 225,1350" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="1330" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Вывод сравнительной</text>
+    <text x="320" y="1345" font-size="11" text-anchor="middle">таблицы и статистики</text>
+    <line x1="320" y1="1350" x2="320" y2="1380" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 17. ОСВОБОЖДЕНИЕ ПАМЯТИ ========== -->
+    <rect x="200" y="1380" width="240" height="40" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="320" y="1405" font-size="13" text-anchor="middle" font-weight="bold" font-style="italic">Освобождение памяти (free)</text>
+    <line x1="320" y1="1420" x2="320" y2="1450" stroke="black" stroke-width="1.8"/>
+
+    <!-- ========== 18. КОНЕЦ (ОСНОВНОЙ) ========== -->
+    <rect x="275" y="1450" width="150" height="40" rx="20" fill="white" stroke="black" stroke-width="1.8"/>
+    <text x="350" y="1476" font-size="16" font-weight="bold" text-anchor="middle" font-style="italic">Конец</text>
+</svg>
